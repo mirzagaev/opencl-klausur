@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="OpenCLMgr.cpp">
+      <Filter>OpenCL Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Aufgabe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{d2693191-93db-438a-95d7-39f3fbca924d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenCL Files">
+      <UniqueIdentifier>{b35d6faa-8660-40a4-a9aa-7d100b374bd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{d7970a1c-08f3-40d2-ae7d-d5b10c0ced7f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="OpenCLMgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kernel.cl">
+      <Filter>OpenCL Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
