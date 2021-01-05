@@ -65,12 +65,12 @@ int main(int argc, char* argv[])
 	OpenCLMgr mgr;
 
 	// Initial input,output for the host and create memory objects for the kernel
-	int size = 15;
+	int size = 20;
 	cl_int *input = new cl_int[size];
 	cl_int *output = new cl_int[size];
 
 	for (int i=0 ; i<size ; i++)
-		input[i] = 2;
+		input[i] = i;
 
 	// call function
 	praefixsumme(input, output, size, mgr);
