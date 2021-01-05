@@ -1,10 +1,10 @@
 /**********************************************************************
-Copyright ©2013 Advanced Micro Devices, Inc. All rights reserved.
+Copyright 2013 Advanced Micro Devices, Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
-•	Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-•	Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or
+	Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+	Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -36,14 +36,15 @@ int praefixsumme(cl_int *input, cl_int *output, int size, OpenCLMgr& mgr)
 {
 	cl_int status;
 
-	int clsize = (size + 8) / 8 * 8;  // next multiple of 512
+	int fields = 8;
+	int clsize = (size + (fields - 1)) / fields * fields;  // das Vielfache von 256 (256,512,1024,1280,...)
 
 	// create OpenClinput buffer
 	cl_mem inputBuffer = clCreateBuffer(mgr.context, CL_MEM_READ_ONLY, clsize * sizeof(cl_int),NULL, NULL);
 	status = clEnqueueWriteBuffer(mgr.commandQueue, inputBuffer, CL_TRUE, 0, clsize * sizeof(cl_int), input, 0, NULL, NULL);
 	CHECK_SUCCESS("Error: writing buffer!")
 	if (size < clsize) {
-		// unintialisierte Elemente [0-255] 0 setzen, um Berechnung zu ermöglichen
+		// unintialisierte Elemente [0-255] 0 setzen, um Berechnung zu ermglichen
 		cl_int tmp[8] = { 0 };
 		status = clEnqueueWriteBuffer(mgr.commandQueue, inputBuffer, CL_TRUE, size * sizeof(cl_int), (clsize-size)*sizeof(cl_int), &tmp, 0, NULL, NULL);
 		CHECK_SUCCESS("Error: writing buffer!")
@@ -59,13 +60,13 @@ int praefixsumme(cl_int *input, cl_int *output, int size, OpenCLMgr& mgr)
 	CHECK_SUCCESS("Error: setting kernel argument 2!")
 
 	// Run the kernel.
-	size_t global_work_size[1] = { clsize };
-	size_t local_work_size[1] = { clsize };
+	size_t global_work_size[1] = { fields };
+	size_t local_work_size[1] = { fields };
 	status = clEnqueueNDRangeKernel(mgr.commandQueue, mgr.praefixsumme256_kernel, 1, NULL, global_work_size, local_work_size, 0, NULL, NULL);
 	CHECK_SUCCESS("Error: enqueuing kernel!")
 
 	// get resulting array
-	status = clEnqueueReadBuffer(mgr.commandQueue, outputBuffer, CL_TRUE, 0, clsize * sizeof(cl_int), output, 0, NULL, NULL);
+	status = clEnqueueReadBuffer(mgr.commandQueue, outputBuffer, CL_TRUE, 0, fields * sizeof(cl_int), output, 0, NULL, NULL);
 	CHECK_SUCCESS("Error: reading buffer!")
 
 	// release buffers
