@@ -3,33 +3,14 @@ __kernel void praefixsumme256_kernel(__global int* in, __global int* out)
 	int gid = get_global_id(0);
 	int lid = get_local_id(0);
 	int groupid = get_group_id(0);
+
+	printf("gid: %d \n", gid);
+	printf("lid: %d \n", lid);
 	
 	__local int localArray[8];
-	
-	int k = 8;	// depth of tree: log2(256)
-	int d, i, i1, i2;
 
-	// copy to local memory
-	localArray[lid] = in[gid];
-	barrier(CLK_LOCAL_MEM_FENCE);
-
-	// write result to global memory
-	out[gid] = localArray[lid];
-}
-
-__kernel void praefixsumme256_kernel2(__global int* in, __global int* out)
-{
-	int gid = get_global_id(0);
-	int lid = get_local_id(0);
-	int groupid = get_group_id(0);
-	
-	__local int localArray[8];
-	
 	int k = 3;	// depth of tree: log2(256)
 	int d, i, i1, i2;
-
-	// printf("gid %d; \n",gid);
-	// printf("\nlid %d; \n",lid);
 
 	// copy to local memory
 	localArray[lid] = in[gid];
@@ -45,8 +26,6 @@ __kernel void praefixsumme256_kernel2(__global int* in, __global int* out)
 			localArray[i2] = localArray[i1] + localArray[i2];
 		}
 		barrier(CLK_LOCAL_MEM_FENCE);
-		// printf("\nlocalArray=%d\n", i2);
-		// printf("%d \n", localArray[i2]);
 	}
 
 	// Down-Sweep
@@ -69,5 +48,5 @@ __kernel void praefixsumme256_kernel2(__global int* in, __global int* out)
 	}
 
 	// write result to global memory
-	out[gid] = 2;
+	out[gid] = localArray[lid];
 }
