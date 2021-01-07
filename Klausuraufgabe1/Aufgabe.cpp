@@ -42,12 +42,12 @@ int praefixsumme(cl_int *input, cl_int *output, int size, OpenCLMgr& mgr)
 
 	// Run the kernel.
 	size_t global_work_size[1] = { clsize };
-	size_t local_work_size[1] = { clsize };
+	size_t local_work_size[1] = { fields };
 	status = clEnqueueNDRangeKernel(mgr.commandQueue, mgr.praefixsumme256_kernel, 1, NULL, global_work_size, local_work_size, 0, NULL, NULL);
 	CHECK_SUCCESS("Error: enqueuing kernel!")
 
 	// get resulting array
-	status = clEnqueueReadBuffer(mgr.commandQueue, outputBuffer, CL_TRUE, 0, size * sizeof(cl_int), output, 0, NULL, NULL);
+	status = clEnqueueReadBuffer(mgr.commandQueue, outputBuffer, CL_TRUE, 0, clsize * sizeof(cl_int), output, 0, NULL, NULL);
 	CHECK_SUCCESS("Error: reading buffer!")
 
 	// release buffers
@@ -65,12 +65,12 @@ int main(int argc, char* argv[])
 	OpenCLMgr mgr;
 
 	// Initial input,output for the host and create memory objects for the kernel
-	int size = 20;
+	int size = 13;
 	cl_int *input = new cl_int[size];
 	cl_int *output = new cl_int[size];
 
 	for (int i=0 ; i<size ; i++)
-		input[i] = i;
+		input[i] = 1;
 
 	// call function
 	praefixsumme(input, output, size, mgr);
