@@ -15,17 +15,17 @@ Downsweep (final) result is:
 // Thread block size
 #define BLOCK_SIZE 8
 
-__kernel void praefixsumme256_kernel(__global int* in, __global int* out)
+__kernel void praefixsumme256_kernel(__global int* in, __global int* b_out, __global int* c_out)
 {
 	int gid = get_global_id(0);
 	int lid = get_local_id(0);
-	int groupid = get_group_id(0);
+	int groupid = get_group_id(0);		// wichtig für C
+	int size_x = get_global_size(0);
+	int numgroups = get_num_groups(0);
+
+	__local int localArray[BLOCK_SIZE];
 	
-	__local int localArray[8];
-	
-	//printf("%d - %d \n", gid, lid);
-	
-	int k = 3;	// depth of tree: log2(8)
+	int k = 3;	// depth of tree: log2(256)
 	int d, i, i1, i2;
 
 	// copy to local memory
@@ -33,7 +33,7 @@ __kernel void praefixsumme256_kernel(__global int* in, __global int* out)
 	barrier(CLK_LOCAL_MEM_FENCE);
 
 	// Up-Sweep
-	int noItemsThatWork = 4;
+	int noItemsThatWork = (BLOCK_SIZE/2);
 	int offset = 1;
 	for (d = 0; d<k; d++, noItemsThatWork >>= 1, offset <<= 1) {
 		if (lid < noItemsThatWork) {
@@ -45,13 +45,13 @@ __kernel void praefixsumme256_kernel(__global int* in, __global int* out)
 	}
 
 	// Down-Sweep
-	if (lid == 7) {
-		localArray[7] = 0;
+	if (lid == (BLOCK_SIZE-1)) {
+		localArray[(BLOCK_SIZE-1)] = 0;
 	}
 	barrier(CLK_LOCAL_MEM_FENCE);
 
 	noItemsThatWork = 1;
-	offset = 4;
+	offset = (BLOCK_SIZE/2);
 	for (d = 0; d<k; d++, noItemsThatWork <<= 1, offset >>= 1)
 	{
 		if (lid < noItemsThatWork) {
@@ -63,15 +63,17 @@ __kernel void praefixsumme256_kernel(__global int* in, __global int* out)
 		}
 		barrier(CLK_LOCAL_MEM_FENCE);
 	}
+
+	// B output
+	b_out[gid] = localArray[lid];
 	
-	if (lid == 7) {
+	// C output
+	if (lid == (BLOCK_SIZE-1)) {
 		int a_last_item = in[gid];
-		int b_last_item = localArray[7];
+		int b_last_item = b_out[gid];
 		int c_ergebnis = a_last_item+b_last_item;
-		printf("%d + %d = %d \n", a_last_item, b_last_item, c_ergebnis);
+		c_out[groupid] = c_ergebnis;
+		//printf("%d. %d + %d = %d \n", groupid, a_last_item, b_last_item, c_ergebnis);
 	}
 	barrier(CLK_LOCAL_MEM_FENCE);
-
-	// write result to global memory
-	out[gid] = localArray[lid];
 }
