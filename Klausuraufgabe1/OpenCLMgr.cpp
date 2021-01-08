@@ -18,6 +18,7 @@ OpenCLMgr::OpenCLMgr()
 	commandQueue = 0;
 	program = 0;
 	praefixsumme256_kernel = 0;
+	summe_kernel = 0;
 
 	valid = (init() == SUCCESS);
 }
@@ -28,6 +29,7 @@ OpenCLMgr::~OpenCLMgr()
 
 	// Gebe Ressourcen fur den Kernel frei.
 	if (praefixsumme256_kernel) status = clReleaseKernel(praefixsumme256_kernel);
+	if (summe_kernel) status = clReleaseKernel(summe_kernel);
 
 	// Gebe Ressourcen wieder frei.
 	if (program) status = clReleaseProgram(program);
@@ -188,6 +190,8 @@ cl_int OpenCLMgr::init()
 	// Kernel für die Laufzeitumgebung bekanntgegeben
 	praefixsumme256_kernel = clCreateKernel(program, "praefixsumme256_kernel", &status);
 	CHECK_SUCCESS("Error: creating summe praefixsumme256_kernel")
+	summe_kernel = clCreateKernel(program, "summe_kernel", &status);
+	CHECK_SUCCESS("Error: creating summe summe_kernel")
 
 	if (devices != NULL)
 	{

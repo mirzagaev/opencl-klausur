@@ -1,6 +1,7 @@
 ﻿  Aufgabe.cpp
-E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(24,55): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
-E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(40,33): warning C4838: Konvertierung von "int" zu "size_t" erfordert eine einschränkende Konvertierung
-E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(41,32): warning C4838: Konvertierung von "int" zu "size_t" erfordert eine einschränkende Konvertierung
-E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(64): warning C4715: "praefixsummeRek": Nicht alle Codepfade geben einen Wert zurück.
+E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(46,33): warning C4838: Konvertierung von "int" zu "size_t" erfordert eine einschränkende Konvertierung
+E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(47,32): warning C4838: Konvertierung von "int" zu "size_t" erfordert eine einschränkende Konvertierung
+E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(91,33): warning C4838: Konvertierung von "int" zu "size_t" erfordert eine einschränkende Konvertierung
+E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(92,32): warning C4838: Konvertierung von "int" zu "size_t" erfordert eine einschränkende Konvertierung
+E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(73,6): warning C4101: "result": Unreferenzierte lokale Variable
   Klausuraufgabe1.vcxproj -> E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\x64\Debug\Klausuraufgabe1.exe

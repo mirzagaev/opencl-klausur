@@ -24,6 +24,7 @@ public:
 	cl_program program;						// Programm zur Freigabe
 
 	cl_kernel praefixsumme256_kernel;		// Speicherplatz des Kernels, array size exactly 256. Only one workgroup uses
+	cl_kernel summe_kernel;
 
 private:
 	static int convertToString(const char* filename, std::string& s);
