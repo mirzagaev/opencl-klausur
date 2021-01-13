@@ -48,11 +48,11 @@ int praefixsumme(cl_int* input, cl_int* output_b, cl_int* output_c, cl_int* outp
 	status = clEnqueueNDRangeKernel(mgr.commandQueue, mgr.praefixsumme256_kernel, 1, NULL, global_work_size, local_work_size, 0, NULL, NULL);
 	CHECK_SUCCESS("Error: enqueuing kernel!")
 
-	status = clEnqueueReadBuffer(mgr.commandQueue, bBuffer, CL_TRUE, 0, clsize * sizeof(cl_int), output_b, 0, NULL, NULL);
+	status = clEnqueueReadBuffer(mgr.commandQueue, bBuffer, CL_TRUE, 0, size * sizeof(cl_int), output_b, 0, NULL, NULL);
 	CHECK_SUCCESS("Error: reading buffer!")
-	status = clEnqueueReadBuffer(mgr.commandQueue, cBuffer, CL_TRUE, 0, clsize * sizeof(cl_int), output_c, 0, NULL, NULL);
+	status = clEnqueueReadBuffer(mgr.commandQueue, cBuffer, CL_TRUE, 0, size * sizeof(cl_int), output_c, 0, NULL, NULL);
 	CHECK_SUCCESS("Error: reading buffer!")
-	status = clEnqueueReadBuffer(mgr.commandQueue, dBuffer, CL_TRUE, 0, clsize * sizeof(cl_int), output_d, 0, NULL, NULL);
+	status = clEnqueueReadBuffer(mgr.commandQueue, dBuffer, CL_TRUE, 0, size * sizeof(cl_int), output_d, 0, NULL, NULL);
 	CHECK_SUCCESS("Error: reading buffer!")
 
 	status = clReleaseMemObject(aBuffer);
@@ -93,7 +93,7 @@ cl_int summe(cl_int* inputB, cl_int* inputD, cl_int* output_e, int size, OpenCLM
 	status = clEnqueueNDRangeKernel(mgr.commandQueue, mgr.summe_kernel, 1, NULL, global_work_size, local_work_size, 0, NULL, NULL);
 	CHECK_SUCCESS("Error: enqueuing kernel!")
 
-	status = clEnqueueReadBuffer(mgr.commandQueue, outputBuffer, CL_TRUE, 0, clsize * sizeof(cl_int), output_e, 0, NULL, NULL);
+	status = clEnqueueReadBuffer(mgr.commandQueue, outputBuffer, CL_TRUE, 0, size * sizeof(cl_int), output_e, 0, NULL, NULL);
 	CHECK_SUCCESS("Error: reading buffer!")
 
 	// release buffers
@@ -109,7 +109,7 @@ int main(int argc, char* argv[])
 	OpenCLMgr mgr;
 
 	// Initial input,output for the host and create memory objects for the kernel
-	int size = 20;
+	int size = 60;
 	cl_int* input = new cl_int[size];
 	cl_int* output_b = new cl_int[size];
 	cl_int* output_c = new cl_int[size];
