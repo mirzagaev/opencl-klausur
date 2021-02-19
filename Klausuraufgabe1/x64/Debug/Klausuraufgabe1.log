@@ -1,7 +1,0 @@
-﻿  Aufgabe.cpp
-E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(46,33): warning C4838: Konvertierung von "int" zu "size_t" erfordert eine einschränkende Konvertierung
-E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(47,32): warning C4838: Konvertierung von "int" zu "size_t" erfordert eine einschränkende Konvertierung
-E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(91,33): warning C4838: Konvertierung von "int" zu "size_t" erfordert eine einschränkende Konvertierung
-E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(92,32): warning C4838: Konvertierung von "int" zu "size_t" erfordert eine einschränkende Konvertierung
-E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\Klausuraufgabe1\Aufgabe.cpp(73,6): warning C4101: "result": Unreferenzierte lokale Variable
-  Klausuraufgabe1.vcxproj -> E:\___AKTUELLE_VORLESUNGEN\113544a-PROGRAMMING-MASSIVELY-PARALLEL-PROCESSORS\__KLAUSUR\Klausuraufgabe1\x64\Debug\Klausuraufgabe1.exe
