@@ -62,21 +62,19 @@ __kernel void praefixsumme256_kernel(__global int* in, __global int* b_out, __gl
 		barrier(CLK_LOCAL_MEM_FENCE);
 	}
 
-	// B output
+	// Block B
 	b_out[gid] = localArray[lid];
 	
-	// C output
-	if (lid == (BLOCK_SIZE-1)) {
-		int a_last_item = in[gid];
+	// Block C
+	if (lid == (BLOCK_SIZE-1)) {						// jedes 255. Feld
+		int a_last_item = in[gid];						// Wert aus in mit der Index des aktuellen global_id
 		int b_last_item = b_out[gid];
 		int c_ergebnis = a_last_item+b_last_item;
 		c_out[groupid] = c_ergebnis;
-		//printf("%d. %d + %d = %d \n", groupid, a_last_item, b_last_item, c_ergebnis);
 	}
 	barrier(CLK_LOCAL_MEM_FENCE);
-
 	
-	// D output
+	// Block D
 	for (int i = 1; i <= BLOCK_SIZE; i++) {
 		int c_last_item = c_out[i-1];
 		int d_last_item = d_out[i-1];
@@ -89,7 +87,7 @@ __kernel void summe_kernel(__global int* inB, __global int* inD, __global int* o
 {
 	int gid = get_global_id(0);
 	int lid = get_local_id(0);
-	int groupid = get_group_id(0);		// wichtig für C
+	int groupid = get_group_id(0);
 
 	__local int localArrayB[BLOCK_SIZE];
 	__local int localArrayD[BLOCK_SIZE];
